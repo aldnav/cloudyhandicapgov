@@ -27,10 +27,8 @@ function fetchReports() {
     }).done(function(json) {
         for (var i = 0; i < json.length; i++) {
             var time = JSON.parse(json[i].location);
-            console.log(time)
             createMarkers({lat: time[0], lng: time[1]}, map, json[i]);
         }
-
         // make data something useful
     }).fail(function(xhr, status, error) {
         console.log('Error: ', error);
