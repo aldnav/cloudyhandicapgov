@@ -2,8 +2,12 @@
 """ MAIN APP SERVER """
 
 import json
-from flask import Flask, render_template, Response, request
+import dataset
+from flask import Flask, render_template, Response
 app = Flask(__name__)
+
+db = dataset.connect('sqlite:///mydb.db')
+table = db['tweets']
 
 
 @app.route("/")
@@ -12,15 +16,18 @@ def index():
     return render_template('index.html')
 
 
-@app.route("/api/reports/", methods=['GET', 'POST'])
+@app.route("/api/reports/")
 def fetch():
     """ Reports are returned here """
-    if request.method == 'GET':
-        data = {}
-        return Response(
-            response=json.dumps(data), status=200, mimetype="application/json")
-    else:
-        print request
+    data = []
+    try:
+        if len(table):
+            for tweet in table.all():
+                data.append(dict(tweet))
+    except Exception, e:
+        print e
+    return Response(
+        response=json.dumps(data), status=200, mimetype="application/json")
 
 
 if __name__ == "__main__":
