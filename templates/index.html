@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>CLOUDY HANDICAP GOV</title>
-    <meta name="viewport" content="initial-scale=1.0">
+    <title>Drawing tools</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <link type="text/css" rel="stylesheet"
         href="{{ url_for('static',
@@ -11,17 +11,42 @@
   <body>
     <div id="map"></div>
     <script>
-      var map;
+      // This example requires the Drawing library. Include the libraries=drawing
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZ7r3VpJRKalB1tfj8InUkP42CD7lvNrk&libraries=drawing">
+
+    var markers = [
+        {lat: 10.3157, lng: 123.8754},
+        {lat: 10.3157, lng: 123.8854},
+        {lat: 10.3157, lng: 123.8954},
+        {lat: 10.3157, lng: 123.8654},
+        {lat: 10.3157, lng: 123.8554},
+    ]
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.397, lng: 150.644},
-          zoom: 8
+          center: {lat: 10.3157, lng: 123.8854},
+          zoom: 14
         });
+
+        for (var i = 0; i < markers.length; i++) {
+            createMarkers(markers[i], map);
+        }
+      }
+
+      function createMarkers(latlng, map) {
+          var marker = new google.maps.Marker({
+             position: latlng,
+             map: map,
+             title: 'Hello Cebu'
+           });
+           marker.addListener('click', function() {
+              alert('twitter data');
+            });
       }
     </script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.0.0.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/site.js') }}"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCabaVV8dJjIJaRqsvDYwgTLI6AwDXFnzU&callback=initMap"
-    async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZ7r3VpJRKalB1tfj8InUkP42CD7lvNrk&libraries=drawing&callback=initMap"
+         async defer></script>
   </body>
 </html>
