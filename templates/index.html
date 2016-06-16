@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <link type="text/css" rel="stylesheet"
         href="{{ url_for('static',
-              filename='hello.css')}}" />
+              filename='css/hello.css')}}" />
   </head>
   <body>
     <div id="map"></div>
@@ -19,6 +19,8 @@
         });
       }
     </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.0.0.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/site.js') }}"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCabaVV8dJjIJaRqsvDYwgTLI6AwDXFnzU&callback=initMap"
     async defer></script>
   </body>
