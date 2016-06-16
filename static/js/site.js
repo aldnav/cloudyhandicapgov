@@ -26,6 +26,7 @@ function fetchReports() {
         dataType: 'json'
     }).done(function(json) {
         console.info(json);
+
         // make data something useful
     }).fail(function(xhr, status, error) {
         console.log('Error: ', error);

@@ -9,11 +9,22 @@
               filename='css/hello.css')}}" />
   </head>
   <body>
-    <div id="map"></div>
+    <div id="map" class="hover"></div>
+    <div class="content">
+       <main>
+           <div class="place">Central Park, Wherever</div>
+           <p class="status">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer consectetur sapien eu volutpat finibus. Nam id lobortis ex. Nam ac turpis in diam hendrerit bibendum. Nunc nisl ligula, semper ut sem nec, hendrerit eleifend nibh. Praesent tristique elit lacus, sed gravida dolor tincidunt luctus. Duis pulvinar euismod dolor, quis cursus purus laoreet in. Maecenas mi velit, mattis eget mi quis, rutrum suscipit justo. Suspendisse euismod nisl a arcu lobortis, id posuere nunc rutrum. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+       </main>
+       <footer>
+           <span class="name">Lorem Ipsum or long name here</span>
+           <span class = "time">January 1, 2013 timezone more things</span>
+       </footer>
+   </div>
     <script>
       // This example requires the Drawing library. Include the libraries=drawing
       // parameter when you first load the API. For example:
       // <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCZ7r3VpJRKalB1tfj8InUkP42CD7lvNrk&libraries=drawing">
+
 
     var markers = [
         {lat: 10.3157, lng: 123.8754},
@@ -31,6 +42,7 @@
         for (var i = 0; i < markers.length; i++) {
             createMarkers(markers[i], map);
         }
+
       }
 
       function createMarkers(latlng, map) {
@@ -39,8 +51,11 @@
              map: map,
              title: 'Hello Cebu'
            });
-           marker.addListener('click', function() {
-              alert('twitter data');
+           marker.addListener('click', function(e) {
+                $('.content').show();
+                setTimeout(function(){
+                    $('.content').hide();
+                }, 5000);
             });
       }
     </script>
