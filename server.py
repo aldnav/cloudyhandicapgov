@@ -23,7 +23,13 @@ def fetch():
     try:
         if len(table):
             for tweet in table.all():
-                data.append(dict(tweet))
+                data.append({
+                    'location': tweet['location'],
+                    'status': tweet['status'],
+                    'time': tweet['time'],
+                    'name': tweet['name'],
+                    'place': tweet['place']
+                })
     except Exception, e:
         print e
     return Response(
