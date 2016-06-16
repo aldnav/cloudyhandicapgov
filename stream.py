@@ -2,7 +2,7 @@ import datetime
 import json
 import tweepy
 import pprint
-import requests
+import dataset
 
 # stores consumer key and secret, access token and token secret
 from access import AuthAccess
@@ -10,6 +10,9 @@ from access import AuthAccess
 private = AuthAccess()
 
 POST_URL = 'http://192.168.1.39:5000/api/reports/'
+
+db = dataset.connect('sqlite:///mydb.db')
+table = db['tweets']
 
 
 class StreamListener(tweepy.StreamListener):
@@ -29,7 +32,12 @@ class StreamListener(tweepy.StreamListener):
                 'name': decoded['screen_name'],
                 'place': decoded['place']['full_name'],
             }
-            requests.post(POST_URL, data=json.dumps(data1))
+        #     print 'fuck', data1
+        #     # requests.post(POST_URL, data=json.dumps(data1))
+
+            # print json.dumps(decoded)
+            table.insert(data1)
+            print data1
         return True
 
     def on_error(self, status):
