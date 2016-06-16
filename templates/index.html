@@ -50,13 +50,10 @@
           zoom: 14
         });
 
-        for (var i = 0; i < markers.length; i++) {
-            createMarkers(markers[i], map, markers[i]['data']);
-        }
-
       }
 
       function createMarkers(latlng, map, data) {
+          console.log(latlng, map, data);
           var marker = new google.maps.Marker({
              position: latlng,
              map: map,
@@ -64,7 +61,6 @@
              data:data,
            });
            marker.addListener('click', function(e) {
-               console.log(marker.data);
                 $('.content').show();
                 $('.content .place').html(marker.data.place);
                 $('.content .status').html(marker.data.status);
