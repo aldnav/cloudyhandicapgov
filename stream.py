@@ -16,14 +16,15 @@ class StreamListener(tweepy.StreamListener):
         geo = decoded['geo']
 
         if geo:
-            # print '@%s: %s' % (decoded['user']['screen_name'], decoded['text'].encode('ascii', 'ignore'))
-
-            pp = pprint.PrettyPrinter(indent=2)
-            pp.pprint(decoded)
-
-            # with open('arrow', 'ab') as sample_file:
-            #     sample_file.write(json.dumps(decoded) + '\n')
-
+            s = decoded['timestamp_ms'] / 1000.0
+            time = datetime.datetime.fromtimestamp(s).strftime('%Y-%m-%d %H:%M:%S.%f')
+            data1 = {
+                'location': decoded['geo']['coordinates'],
+                'status': decoded['text'].encode('ascii', 'ignore'),
+                'time': time,
+                'name': decoded['screen_name'],
+                'place': decoded['place']['full_name'],
+            }
         return True
 
     def on_error(self, status):
