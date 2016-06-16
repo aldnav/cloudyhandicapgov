@@ -8,7 +8,7 @@ html, body {
 }
 
 .hover {position: relative;}
-.content {background-color: #F5F5F5;width: 250px; border-radius: 4px;position: absolute; bottom: 20px; left: -10px; display: none;}
+.content {background-color: #F5F5F5;width: 250px; border-radius: 4px;position: absolute;top: 0;right: 0; bottom: 0; left: 0; display: none; margin: auto; height: 125px;}
 .content main {padding: 10px; border-bottom: 1px solid rgba(0,0,0,0.12);}
 .content main .location {font-size: 18px;overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
 .content p {
