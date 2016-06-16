@@ -27,11 +27,21 @@
 
 
     var markers = [
-        {lat: 10.3157, lng: 123.8754},
-        {lat: 10.3157, lng: 123.8854},
-        {lat: 10.3157, lng: 123.8954},
-        {lat: 10.3157, lng: 123.8654},
-        {lat: 10.3157, lng: 123.8554},
+        {lat: 10.3157, lng: 123.8754, data:{
+            'place': '123', 'status': 'sadf', 'name': 'sdaf', 'time':'adf'
+        }},
+        {lat: 10.3157, lng: 123.8854, data:'hello1', data:{
+            'place': '123', 'status': 'sadf', 'name': 'sdaf', 'time':'adf'
+        }},
+        {lat: 10.3157, lng: 123.8954, data:'hello2', data:{
+            'place': '123', 'status': 'sadf', 'name': 'sdaf', 'time':'adf'
+        }},
+        {lat: 10.3157, lng: 123.8654, data:'hello3', data:{
+            'place': '123', 'status': 'sadf', 'name': 'sdaf', 'time':'adf'
+        }},
+        {lat: 10.3157, lng: 123.8554, data:'hello4', data:{
+            'place': '123', 'status': 'sadf', 'name': 'sdaf', 'time':'adf'
+        }},
     ]
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
@@ -40,19 +50,25 @@
         });
 
         for (var i = 0; i < markers.length; i++) {
-            createMarkers(markers[i], map);
+            createMarkers(markers[i], map, markers[i]['data']);
         }
 
       }
 
-      function createMarkers(latlng, map) {
+      function createMarkers(latlng, map, data) {
           var marker = new google.maps.Marker({
              position: latlng,
              map: map,
-             title: 'Hello Cebu'
+             title: 'Hello Cebu',
+             data:data,
            });
            marker.addListener('click', function(e) {
+               console.log(marker.data);
                 $('.content').show();
+                $('.content .place').html(marker.data.place);
+                $('.content .status').html(marker.data.status);
+                $('.content .name').html(marker.data.name);
+                $('.content .time').html(marker.data.time);
                 setTimeout(function(){
                     $('.content').hide();
                 }, 5000);
